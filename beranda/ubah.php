@@ -14,6 +14,7 @@ if (isset($_POST['ubah'])) {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
     $nip = $_POST['nip'];
+    $uraian_pangkat = $_POST['uraian_pangkat'];
     $sk_jabatan = $_POST['sk_jabatan'];
     $tanggal_sk = $_POST['tanggal_sk'];
     $unit_kerja = $_POST['unit_kerja'];
@@ -24,10 +25,11 @@ if (isset($_POST['ubah'])) {
     if ((isset($_POST['catatan']))) {
         $catatan = $_POST['catatan'];
         $sql = $pdo->prepare(
-            "UPDATE data_kerja SET nama=:nama, nip=:nip, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan, catatan=:catatan WHERE id=:id"
+            "UPDATE data_kerja SET nama=:nama, nip=:nip, uraian_pangkat=:uraian_pangkat, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan, catatan=:catatan WHERE id=:id"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
+        $sql->bindParam(':uraian_pangkat', $uraian_pangkat);
         $sql->bindParam(':sk_jabatan', $sk_jabatan);
         $sql->bindParam(':tanggal_sk', $tanggal_sk);
         $sql->bindParam(':unit_kerja', $unit_kerja);
@@ -48,10 +50,11 @@ if (isset($_POST['ubah'])) {
         }
     } else {
         $sql = $pdo->prepare(
-            "UPDATE data_kerja SET nama=:nama, nip=:nip, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan WHERE id=:id"
+            "UPDATE data_kerja SET nama=:nama, nip=:nip, uraian_pangkat=:uraian_pangkat, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan WHERE id=:id"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
+        $sql->bindParam(':uraian_pangkat', $uraian_pangkat);
         $sql->bindParam(':sk_jabatan', $sk_jabatan);
         $sql->bindParam(':tanggal_sk', $tanggal_sk);
         $sql->bindParam(':unit_kerja', $unit_kerja);
@@ -120,6 +123,10 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
                                                 <div class="form-group">
                                                     <label>NIP</label>
                                                     <input type="text" class="form-control" placeholder="" name="nip" value="<?= $row['nip']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Uraian Pangkat</label>
+                                                    <input type="text" class="form-control" placeholder="" name="uraian_pangkat" value="<?= $row['uraian_pangkat']; ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>SK Jabatan</label>

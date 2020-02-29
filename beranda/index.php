@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Los_Angeles');
+error_reporting(0);
 include '../koneksi.php';
 
 session_start();
@@ -47,6 +49,7 @@ $role = $_SESSION['role'];
                                             <th>NIP</th>
                                             <th>Uraian Pangkat</th>
                                             <th>SK Jabatan</th>
+                                            <th>Tanggal SK</th>
                                             <th>Unit Kerja</th>
                                             <th>Jabatan</th>
                                             <th>Masa Kerja</th>
@@ -64,19 +67,20 @@ $role = $_SESSION['role'];
                                         $no = 1;
                                         $result = $pdo->query("SELECT * FROM data_kerja");
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                            $tanggal1 = new DateTime($row['tanggal_sk']);
-                                            $tanggal2 = new DateTime();
-                                            $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
+                                            // $tanggal1 = new DateTime($row['tanggal_sk']);
+                                            // $tanggal2 = new DateTime();
+                                            // $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
                                         ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?php echo $row['nama'] ?></td>
                                                 <td><?php echo $row['nip'] ?></td>
+                                                <td><?php echo $row['uraian_pangkat'] ?></td>
                                                 <td><?php echo $row['sk_jabatan'] ?></td>
                                                 <td><?php echo $row['tanggal_sk'] ?></td>
                                                 <td><?php echo $row['unit_kerja'] ?></td>
                                                 <td><?php echo $row['jabatan'] ?></td>
-                                                <td><?= number_format($masa_kerja, 4) ?></td>
+                                                <td><?= 1 ?></td>
                                                 <td><?php echo $row['keterangan'] ?></td>
                                                 <?php
                                                 if ($role == 1) {

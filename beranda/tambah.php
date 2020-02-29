@@ -12,6 +12,7 @@ if (isset($_POST['tambah'])) {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
     $nip = $_POST['nip'];
+    $uraian_pangkat = $_POST['uraian_pangkat'];
     $sk_jabatan = $_POST['sk_jabatan'];
     $tanggal_sk = $_POST['tanggal_sk'];
     $unit_kerja = $_POST['unit_kerja'];
@@ -21,10 +22,11 @@ if (isset($_POST['tambah'])) {
     if ((isset($_POST['catatan']))) {
         $catatan = $_POST['catatan'];
         $sql = $pdo->prepare(
-            "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan, catatan) VALUES (:nama, :nip, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan, :catatan)"
+            "INSERT INTO data_kerja (nama, nip, uraian_pangkat, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan, catatan) VALUES (:nama, :nip, :uraian_pangkat, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan, :catatan)"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
+        $sql->bindParam(':uraian_pangkat', $uraian_pangkat);
         $sql->bindParam(':sk_jabatan', $sk_jabatan);
         $sql->bindParam(':tanggal_sk', $tanggal_sk);
         $sql->bindParam(':unit_kerja', $unit_kerja);
@@ -43,14 +45,15 @@ if (isset($_POST['tambah'])) {
                 </script>";
         }
     } else {
-        $query = "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) VALUES ('$nama', '$nip', '$sk_jabatan',  '$tanggal_sk',  '$unit_kerja',  '$jabatan', '$keterangan')";
-        echo $query;
+        // $query = "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) VALUES ('$nama', '$nip', '$sk_jabatan',  '$tanggal_sk',  '$unit_kerja',  '$jabatan', '$keterangan')";
+        // echo $query;
         $sql = $pdo->prepare(
-            "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) 
-            VALUES (:nama, :nip, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan)"
+            "INSERT INTO data_kerja (nama, nip, uraian_pangkat, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) 
+            VALUES (:nama, :nip, :uraian_pangkat, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan)"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
+        $sql->bindParam(':uraian_pangkat', $uraian_pangkat);
         $sql->bindParam(':sk_jabatan', $sk_jabatan);
         $sql->bindParam(':tanggal_sk', $tanggal_sk);
         $sql->bindParam(':unit_kerja', $unit_kerja);
@@ -114,6 +117,10 @@ if (isset($_POST['tambah'])) {
                                                 <div class="form-group">
                                                     <label>NIP</label>
                                                     <input type="text" class="form-control" placeholder="" name="nip">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Uraian Pangkat</label>
+                                                    <input type="text" class="form-control" placeholder="" name="uraian_pangkat">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>SK Jabatan</label>
