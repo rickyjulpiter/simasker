@@ -43,35 +43,57 @@ $role = $_SESSION['role'];
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Nama</th>
                                             <th>NIP</th>
                                             <th>Uraian Pangkat</th>
                                             <th>SK Jabatan</th>
                                             <th>Unit Kerja</th>
                                             <th>Jabatan</th>
                                             <th>Masa Kerja</th>
+                                            <th>Keterangan</th>
+                                            <?php
+                                            if ($role == 1) {
+                                                echo "<th>Catatan</th>";
+                                            }
+                                            ?>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $result = $pdo->query("SELECT A.id,A.nama, A.prodi, A.nim, A.tanggal_tampil, B.pegawai_status AS status FROM data_kerjapraktek A, data_kerjapraktek_status B WHERE A.id = B.data_kerjapraktek_id AND B.pegawai_status = 'Pending' AND A.prodi = '$prodi' ORDER BY A.id DESC");
+                                        $result = $pdo->query("SELECT * FROM data_kerja");
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                            $tanggal1 = new DateTime($row['tanggal_sk']);
+                                            $tanggal2 = new DateTime();
+                                            $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
                                         ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?php echo TanggalIndo($row['tanggal_tampil']) ?></td>
                                                 <td><?php echo $row['nama'] ?></td>
-                                                <td><?php echo $row['prodi'] ?></td>
-                                                <td><?php echo $row['nim'] ?></td>
-
-                                                <td><span class="<?php echo $class; ?>"><?php echo $row['status'] ?></span></td>
+                                                <td><?php echo $row['nip'] ?></td>
+                                                <td><?php echo $row['sk_jabatan'] ?></td>
+                                                <td><?php echo $row['tanggal_sk'] ?></td>
+                                                <td><?php echo $row['unit_kerja'] ?></td>
+                                                <td><?php echo $row['jabatan'] ?></td>
+                                                <td><?= number_format($masa_kerja, 4) ?></td>
+                                                <td><?php echo $row['keterangan'] ?></td>
+                                                <?php
+                                                if ($role == 1) {
+                                                    echo "<td>" . $row['catatan'] . "</td>";
+                                                }
+                                                ?>
                                                 <td>
+                                                    <a class="btn btn-info btn-sm" href="ubah?id=<?= urlencode(base64_encode($row['id'])); ?>">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
 
-                                                    <a href="<?php echo "pegawai-detail?id=" . urlencode(base64_encode($row['id'])); ?>" class="btn btn-info btn-xs">Lihat Detail</a>
-                                                    <a href="<?php echo "pegawai-detail?id=" . urlencode(base64_encode($row['id'])); ?>" class="button gray"><i class="sl sl-icon-eye"></i></a>
-                                                    <!--<a href="#" class="button gray"><i class="sl sl-icon-pencil"></i></a>-->
-                                                    <!-- <a href="<?php echo "hapus?id=" . $row['id']; ?>" class="button gray"><i class="sl sl-icon-close"></i></a> -->
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="hapus?id=<?= urlencode(base64_encode($row['id'])); ?>">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php } ?>

@@ -8,7 +8,9 @@ if ($_SESSION['status'] != "login") {
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
 
-if (isset($_POST['tambah'])) {
+$idUser = urldecode(base64_decode($_GET['id']));
+
+if (isset($_POST['ubah'])) {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
     $nip = $_POST['nip'];
@@ -18,10 +20,11 @@ if (isset($_POST['tambah'])) {
     $jabatan = $_POST['jabatan'];
     $keterangan = $_POST['keterangan'];
 
+
     if ((isset($_POST['catatan']))) {
         $catatan = $_POST['catatan'];
         $sql = $pdo->prepare(
-            "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan, catatan) VALUES (:nama, :nip, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan, :catatan)"
+            "UPDATE data_kerja SET nama=:nama, nip=:nip, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan, catatan=:catatan WHERE id=:id"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
@@ -31,9 +34,10 @@ if (isset($_POST['tambah'])) {
         $sql->bindParam(':jabatan', $jabatan);
         $sql->bindParam(':keterangan', $keterangan);
         $sql->bindParam(':catatan', $catatan);
+        $sql->bindParam(':id', $id);
         if ($sql->execute()) {
             echo "<script>
-                alert('Data berhasil ditambahkan');
+                alert('Data berhasil diubah');
                 window.location.href='index';
                 </script>";
         } else {
@@ -43,11 +47,8 @@ if (isset($_POST['tambah'])) {
                 </script>";
         }
     } else {
-        $query = "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) VALUES ('$nama', '$nip', '$sk_jabatan',  '$tanggal_sk',  '$unit_kerja',  '$jabatan', '$keterangan')";
-        echo $query;
         $sql = $pdo->prepare(
-            "INSERT INTO data_kerja (nama, nip, sk_jabatan, tanggal_sk, unit_kerja, jabatan, keterangan) 
-            VALUES (:nama, :nip, :sk_jabatan, :tanggal_sk, :unit_kerja, :jabatan, :keterangan)"
+            "UPDATE data_kerja SET nama=:nama, nip=:nip, sk_jabatan=:sk_jabatan, tanggal_sk=:tanggal_sk, unit_kerja=:unit_kerja, jabatan=:jabatan, keterangan=:keterangan WHERE id=:id"
         );
         $sql->bindParam(':nama', $nama);
         $sql->bindParam(':nip', $nip);
@@ -56,9 +57,10 @@ if (isset($_POST['tambah'])) {
         $sql->bindParam(':unit_kerja', $unit_kerja);
         $sql->bindParam(':jabatan', $jabatan);
         $sql->bindParam(':keterangan', $keterangan);
+        $sql->bindParam(':id', $id);
         if ($sql->execute()) {
             echo "<script>
-                alert('Data berhasil ditambahkan');
+                alert('Data berhasil diubah');
                 window.location.href='index';
                 </script>";
         } else {
@@ -69,6 +71,10 @@ if (isset($_POST['tambah'])) {
         }
     }
 }
+
+$query = "SELECT * FROM data_kerja WHERE id = '$idUser'";
+$result = $pdo->query($query);
+$row = $result->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -109,15 +115,15 @@ if (isset($_POST['tambah'])) {
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label>Nama</label>
-                                                    <input type="text" class="form-control" placeholder="" name="nama">
+                                                    <input type="text" class="form-control" placeholder="" value="<?= $row['nama']; ?>" name="nama">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>NIP</label>
-                                                    <input type="text" class="form-control" placeholder="" name="nip">
+                                                    <input type="text" class="form-control" placeholder="" name="nip" value="<?= $row['nip']; ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>SK Jabatan</label>
-                                                    <input type="text" class="form-control" placeholder="" name="sk_jabatan">
+                                                    <input type="text" class="form-control" placeholder="" name="sk_jabatan" value="<?= $row['sk_jabatan']; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -133,15 +139,15 @@ if (isset($_POST['tambah'])) {
                                                 <div class="form-group">
                                                     <label>Tanggal SK</label>
                                                     <input type="hidden" name="id" value="<?= $idUser ?>">
-                                                    <input type="date" class="form-control" placeholder="" name="tanggal_sk">
+                                                    <input type="date" class="form-control" placeholder="" name="tanggal_sk" value="<?= $row['tanggal_sk']; ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Unit Kerja</label>
-                                                    <textarea class="form-control" rows="3" placeholder="" name="unit_kerja"></textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="" name="unit_kerja"><?= $row['unit_kerja']; ?></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Jabatan</label>
-                                                    <input type="text" class="form-control" placeholder="" name="jabatan">
+                                                    <input type="text" class="form-control" placeholder="" name="jabatan" value="<?= $row['jabatan']; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -154,15 +160,24 @@ if (isset($_POST['tambah'])) {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-body">
+                                                <?php
+                                                $tanggal1 = new DateTime($row['tanggal_sk']);
+                                                $tanggal2 = new DateTime();
+                                                $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
+                                                ?>
+                                                <div class="form-group">
+                                                    <label>Masa Kerja</label>
+                                                    <input type="text" class="form-control" placeholder="" value="<?= $masa_kerja; ?>" readonly>
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea class="form-control" rows="3" placeholder="" name="keterangan"></textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="" name="keterangan"><?= $row['keterangan']; ?></textarea>
                                                 </div>
                                                 <?php
                                                 if ($role == 1) {
                                                     echo "<div class='form-group'>
                                                             <label>Catatan</label>
-                                                            <textarea class='form-control' rows='3' name='catatan'></textarea>
+                                                            <textarea class='form-control' rows='3' name='catatan'>" . $row['catatan'] . "</textarea>
                                                         </div>";
                                                 }
                                                 ?>
@@ -177,7 +192,7 @@ if (isset($_POST['tambah'])) {
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-footer text-center">
-                                        <button type="submit" class="btn btn-info btn-block" name="tambah">Tambah Data</button>
+                                        <button type="submit" class="btn btn-info btn-block" name="ubah">Ubah Data</button>
                                     </div>
                                 </div>
                             </div>

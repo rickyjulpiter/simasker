@@ -102,12 +102,10 @@ if (isset($_POST['tambah'])) {
                                                     <a class="btn btn-info btn-sm" href="ubah?id=<?= urlencode(base64_encode($row['id'])); ?>">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
-                                                        Edit
                                                     </a>
                                                     <a class="btn btn-danger btn-sm" href="hapus?id=<?= urlencode(base64_encode($row['id'])); ?>">
                                                         <i class="fas fa-trash">
                                                         </i>
-                                                        Delete
                                                     </a>
                                                 </td>
                                             </tr>
@@ -154,14 +152,14 @@ if (isset($_POST['tambah'])) {
                                                 <input type="password" class="form-control" placeholder="" name="password" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Validasi Password</label>
+                                                <label>Re-type Password</label>
                                                 <input type="password" class="form-control" placeholder="" name="password_verif" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <button type="submit" class="btn btn-info btn-block" name="tambah">Tambah Data</button>
+                                    <button type="submit" class="btn btn-info btn-block" name="tambah">Tambah Pengguna</button>
                                 </div>
                             </form>
                         </div>
