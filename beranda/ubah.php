@@ -168,14 +168,14 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
                                         <div class="col-md-12">
                                             <div class="card-body">
                                                 <?php
-                                                $tanggal1 = new DateTime($row['tanggal_sk']);
-                                                $tanggal2 = new DateTime();
-                                                $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
+                                                // $tanggal1 = new DateTime($row['tanggal_sk']);
+                                                // $tanggal2 = new DateTime();
+                                                // $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
                                                 ?>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label>Masa Kerja</label>
                                                     <input type="text" class="form-control" placeholder="" value="<?= $masa_kerja; ?>" readonly>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
                                                     <textarea class="form-control" rows="3" placeholder="" name="keterangan"><?= $row['keterangan']; ?></textarea>
