@@ -17,12 +17,12 @@ if (isset($_POST['ubah'])) {
     $newPassword_verif = $_POST['newPassword_verif'];
     $role = $_POST['role'];
 
-    $sql = $pdo->prepare("SELECT * FROM user WHERE username=:username AND password=:password");
-    $sql->bindParam(':username', $username);
-    $sql->bindParam(':password', $oldPassword);
-    $sql->execute();
-    $data = $sql->fetch();
-    if (empty($_POST['oldPassword']) && empty($_POST['newPassword']) && empty($_POST['newPassword_verif'])) {
+    // $sql = $pdo->prepare("SELECT * FROM user WHERE username=:username AND password=:password");
+    // $sql->bindParam(':username', $username);
+    // $sql->bindParam(':password', $oldPassword);
+    // $sql->execute();
+    // $data = $sql->fetch();
+    if (empty($_POST['newPassword']) && empty($_POST['newPassword_verif'])) {
         $sql = $pdo->prepare("UPDATE user SET role=:role WHERE username=:username");
         $sql->bindParam(':role', $role);
         $sql->bindParam(':username', $username);
@@ -115,10 +115,10 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
                                                         <option value="2">Asisten</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label>Old Password</label>
                                                     <input type="password" class="form-control" placeholder="" name="oldPassword">
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group">
                                                     <label>New Password</label>
                                                     <input type="password" class="form-control" placeholder="" name="newPassword">
