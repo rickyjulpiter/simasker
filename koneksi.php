@@ -6,7 +6,7 @@ date_default_timezone_set('America/Los_Angeles');
 // $password = "";
 // $database = "simasker";
 
-// Sistem Pintar Server
+// // Sistem Pintar Server
 $host = "localhost";
 $username = "u4502442_simasker";
 $password = "m=eu4Z=QUmwn";

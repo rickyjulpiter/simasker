@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link" style="text-align:center;font-weight:200">
-        <img src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <i class="nav-icon fas fa-eye"></i>
         <span class="brand-text font-weight-light"> SIMASKER</span>
     </a>
 
