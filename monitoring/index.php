@@ -83,14 +83,6 @@ $role = $_SESSION['role'];
                                             $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
                                         ?>
                                             <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?php echo $row['nama'] ?></td>
-                                                <td><?php echo $row['nip'] ?></td>
-                                                <td><?php echo $row['uraian_pangkat'] ?></td>
-                                                <td><?php echo $row['sk_jabatan'] ?></td>
-                                                <td><?php echo ($row['tanggal_sk']) ?></td>
-                                                <td><?php echo $row['unit_kerja'] ?></td>
-                                                <td><?php echo $row['jabatan'] ?></td>
                                                 <?php
                                                 $masa_kerja = number_format($masa_kerja, 2);
                                                 if ($masa_kerja < 4) {
@@ -100,8 +92,15 @@ $role = $_SESSION['role'];
                                                 } elseif ($masa_kerja >= 6) {
                                                     $color = "red";
                                                 }
-
                                                 ?>
+                                                <td><?= $no++ ?></td>
+                                                <td style="background-color: <?= $color ?>"><?php echo $row['nama'] ?></td>
+                                                <td><?php echo $row['nip'] ?></td>
+                                                <td><?php echo $row['uraian_pangkat'] ?></td>
+                                                <td><?php echo $row['sk_jabatan'] ?></td>
+                                                <td><?php echo ($row['tanggal_sk']) ?></td>
+                                                <td><?php echo $row['unit_kerja'] ?></td>
+                                                <td><?php echo $row['jabatan'] ?></td>
                                                 <td style="background-color: <?= $color ?>"><?= $masa_kerja ?></td>
                                                 <td><?php echo $row['keterangan'] ?></td>
                                                 <?php
