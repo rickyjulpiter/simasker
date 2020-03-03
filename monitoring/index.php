@@ -68,9 +68,9 @@ $role = $_SESSION['role'];
                                         $no = 1;
                                         $result = $pdo->query("SELECT * FROM data_kerja");
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                            // $tanggal1 = new DateTime($row['tanggal_sk']);
-                                            // $tanggal2 = new DateTime();
-                                            // $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
+                                            $tanggal1 = new DateTime($row['tanggal_sk']);
+                                            $tanggal2 = new DateTime();
+                                            $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
                                         ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
@@ -78,10 +78,10 @@ $role = $_SESSION['role'];
                                                 <td><?php echo $row['nip'] ?></td>
                                                 <td><?php echo $row['uraian_pangkat'] ?></td>
                                                 <td><?php echo $row['sk_jabatan'] ?></td>
-                                                <td><?php echo TanggalIndo($row['tanggal_sk']) ?></td>
+                                                <td><?php echo ($row['tanggal_sk']) ?></td>
                                                 <td><?php echo $row['unit_kerja'] ?></td>
                                                 <td><?php echo $row['jabatan'] ?></td>
-                                                <td><?= 1 ?></td>
+                                                <td><?= number_format($masa_kerja, 2) ?></td>
                                                 <td><?php echo $row['keterangan'] ?></td>
                                                 <?php
                                                 if ($role == 1) {
