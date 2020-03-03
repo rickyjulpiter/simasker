@@ -146,7 +146,7 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
                                                 <div class="form-group">
                                                     <label>Tanggal SK</label>
                                                     <input type="hidden" name="id" value="<?= $idUser ?>">
-                                                    <input type="date" class="form-control" placeholder="" name="tanggal_sk" value="<?= $row['tanggal_sk']; ?>">
+                                                    <input type="date" class="form-control" placeholder="" name="tanggal_sk" value="<?= date("Y-m-d", strtotime($row['tanggal_sk'])); ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Unit Kerja</label>
