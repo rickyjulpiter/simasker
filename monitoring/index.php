@@ -91,7 +91,18 @@ $role = $_SESSION['role'];
                                                 <td><?php echo ($row['tanggal_sk']) ?></td>
                                                 <td><?php echo $row['unit_kerja'] ?></td>
                                                 <td><?php echo $row['jabatan'] ?></td>
-                                                <td><?= number_format($masa_kerja, 2) ?></td>
+                                                <?php
+                                                $masa_kerja = number_format($masa_kerja, 2);
+                                                if ($masa_kerja < 4) {
+                                                    $color = "white";
+                                                } elseif ($masa_kerja >= 4 and $masa_kerja < 6) {
+                                                    $color = "yellow";
+                                                } elseif ($masa_kerja >= 6) {
+                                                    $color = "red";
+                                                }
+
+                                                ?>
+                                                <td style="background-color: <?= $color ?>"><?= $masa_kerja ?></td>
                                                 <td><?php echo $row['keterangan'] ?></td>
                                                 <?php
                                                 if ($role == 1) {
