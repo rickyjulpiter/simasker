@@ -30,87 +30,21 @@ $role = $_SESSION['role'];
 
             <!-- Main content -->
             <section class="content">
-                <div class="row">
-                    <div class="col-12">
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <a href="tambah" class="btn btn-info">Tambah Data</a>
-                                </h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>NIP</th>
-                                            <th>Uraian Pangkat</th>
-                                            <th>SK Jabatan</th>
-                                            <th>Tanggal SK</th>
-                                            <th>Unit Kerja</th>
-                                            <th>Jabatan</th>
-                                            <th>Masa Kerja</th>
-                                            <th>Keterangan</th>
-                                            <?php
-                                            if ($role == 1) {
-                                                echo "<th>Catatan</th>";
-                                            }
-                                            ?>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $no = 1;
-                                        $result = $pdo->query("SELECT * FROM data_kerja");
-                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                            // $tanggal1 = new DateTime($row['tanggal_sk']);
-                                            // $tanggal2 = new DateTime();
-                                            // $masa_kerja = ($tanggal2->diff($tanggal1)->format("%a")) / 365;
-                                        ?>
-                                            <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?php echo $row['nama'] ?></td>
-                                                <td><?php echo $row['nip'] ?></td>
-                                                <td><?php echo $row['uraian_pangkat'] ?></td>
-                                                <td><?php echo $row['sk_jabatan'] ?></td>
-                                                <td><?php echo $row['tanggal_sk'] ?></td>
-                                                <td><?php echo $row['unit_kerja'] ?></td>
-                                                <td><?php echo $row['jabatan'] ?></td>
-                                                <td><?= 1 ?></td>
-                                                <td><?php echo $row['keterangan'] ?></td>
-                                                <?php
-                                                if ($role == 1) {
-                                                    echo "<td>" . $row['catatan'] . "</td>";
-                                                }
-                                                ?>
-                                                <td>
-                                                    <a class="btn btn-info btn-sm" href="ubah?id=<?= urlencode(base64_encode($row['id'])); ?>">
-                                                        <i class="fas fa-pencil-alt">
-                                                        </i>
-
-                                                    </a>
-                                                    <a class="btn btn-danger btn-sm" href="hapus?id=<?= urlencode(base64_encode($row['id'])); ?>">
-                                                        <i class="fas fa-trash">
-                                                        </i>
-
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                        </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-3 mr-5 ml-5">
+                            <img src="Bravo-Bea-Cukai-Fix-Lengkap.png" alt="" width="120%">
                         </div>
-                        <!-- /.card -->
+                        <div class="col-md-8 mt-3">
+                            <h1><b>MONITORING MASA KERJA</b></h1>
+                            <h2>DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
+                            <h3>Kantor Wilayah DJBC Sumatera Utara</h3>
+                            <h4>Bagian Umum</h4>
+                        </div>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
+
+                <img src="bangunan.png" class="card" style="width: 100%; z-index: 0;">
             </section>
             <!-- /.content -->
         </div>

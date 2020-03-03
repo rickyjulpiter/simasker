@@ -7,11 +7,13 @@ include '../template/head.php'; ?>
 
 <body class="hold-transition register-page">
   <div class="register-box">
-    <div class="register-logo">
-      <a href="../../index2.html">Aplikasi <br><b>Monitoring Masa Kerja</b></a>
-    </div>
 
-    <div class="card">
+
+    <div class="card" style="">
+      <div class="register-logo"> <img src="logo.png" alt="" style="width: 50%;padding-top:10px"><br>
+        <h2>SIMASKER</h2>
+        <h5>(APLIKASI MONITORING MASA KERJA)</h5>
+      </div>
       <div class="card-body register-card-body">
 
         <form action="login-aksi" method="POST">
@@ -34,7 +36,7 @@ include '../template/head.php'; ?>
           <div class="row">
             <!-- /.col -->
             <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+              <button type="submit" class="btn btn-outline-warning btn-block">Masuk</button>
             </div>
             <!-- /.col -->
           </div>

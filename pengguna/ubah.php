@@ -12,7 +12,6 @@ $idUser = urldecode(base64_decode($_GET['id']));
 
 if (isset($_POST['ubah'])) {
     $username = $_POST['username'];
-    $oldPassword = md5($_POST['oldPassword']);
     $newPassword = $_POST['newPassword'];
     $newPassword_verif = $_POST['newPassword_verif'];
     $role = $_POST['role'];
