@@ -135,7 +135,8 @@ $role = $_SESSION['role'];
     </div>
     <!-- ./wrapper -->
 
-    <?php include '../template/script.php'; ?>
+    <?php //include '../template/script.php'; 
+    ?>
     <script>
         // $(function() {
         //     $("#example1").DataTable();
