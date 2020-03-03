@@ -14,7 +14,16 @@ $role = $_SESSION['role'];
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" class="">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" class="rel">
 <?php include '../template/head.php'; ?>
+<style>
+    .dt-button {
+        background-color: blue ! important;
+        background-image: -webkit-linear-gradient(top, #17a2b8 0%, #17a2b8 100%) ! important;
+        color: white ! important;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -128,18 +137,85 @@ $role = $_SESSION['role'];
 
     <?php include '../template/script.php'; ?>
     <script>
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
+        // $(function() {
+        //     $("#example1").DataTable();
+        //     $('#example2').DataTable({
+        //         "paging": true,
+        //         "lengthChange": false,
+        //         "searching": false,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": false,
+        //     });
+        // });
+        $(document).ready(function() {
+            var buttonCommon = {
+                exportOptions: {
+                    format: {
+                        body: function(data, row, column, node) {
+
+                            // Strip $ from salary column to make it numeric
+                            return column === 2 ?
+                                data = "'" + data : data;
+                        }
+                    }
+                }
+            };
+            $('#example1').DataTable({
+                columns: [{
+                        data: 'No'
+                    },
+                    {
+                        data: 'Nama'
+                    },
+                    {
+                        data: 'NIP'
+                    },
+                    {
+                        data: 'Uraian Pangkat'
+                    },
+                    {
+                        data: 'SK Jabatan'
+                    },
+                    {
+                        data: 'Tanggal SK'
+                    },
+                    {
+                        data: 'Unit Kerja'
+                    },
+                    {
+                        data: 'Jabatan'
+                    },
+                    {
+                        data: 'Masa Kerja'
+                    },
+                    {
+                        data: 'Keterangan'
+                    },
+                    {
+                        data: 'Aksi'
+                    }
+
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'copyHtml5'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'excelHtml5'
+                    })
+                ]
             });
         });
     </script>
+
+
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 </body>
 
 </html>
