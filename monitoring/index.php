@@ -58,12 +58,12 @@ $role = $_SESSION['role'];
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>NIP</th>
-                                            <th>Uraian Pangkat</th>
+                                            <th>Pangkat</th>
+                                            <th>Jabatan</th>
+                                            <th>Unit Kerja</th>
+                                            <th>Masa Kerja</th>
                                             <th>SK Jabatan</th>
                                             <th>Tanggal SK</th>
-                                            <th>Unit Kerja</th>
-                                            <th>Jabatan</th>
-                                            <th>Masa Kerja</th>
                                             <th>Keterangan</th>
                                             <?php
                                             if ($role == 1) {
@@ -97,11 +97,11 @@ $role = $_SESSION['role'];
                                                 <td style="background-color: <?= $color ?>"><?php echo $row['nama'] ?></td>
                                                 <td><?php echo $row['nip'] ?></td>
                                                 <td><?php echo $row['uraian_pangkat'] ?></td>
+                                                <td><?php echo $row['jabatan'] ?></td>
+                                                <td><?php echo $row['unit_kerja'] ?></td>
+                                                <td style="background-color: <?= $color ?>"><?= $masa_kerja ?></td>
                                                 <td><?php echo $row['sk_jabatan'] ?></td>
                                                 <td><?php echo ($row['tanggal_sk']) ?></td>
-                                                <td><?php echo $row['unit_kerja'] ?></td>
-                                                <td><?php echo $row['jabatan'] ?></td>
-                                                <td style="background-color: <?= $color ?>"><?= $masa_kerja ?></td>
                                                 <td><?php echo $row['keterangan'] ?></td>
                                                 <?php
                                                 if ($role == 1) {
